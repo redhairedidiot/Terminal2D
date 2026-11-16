@@ -33,6 +33,16 @@ public class Vector2
 
         return Math.Sqrt(distX + distY);
     }
+
+    public static bool operator ==(Vector2 x, Vector2 y) => x.X == y.X && x.Y == y.Y;
+    public static bool operator !=(Vector2 x, Vector2 y) => !(x == y);
+
+    public override int GetHashCode() => X + Y;
+
+    public override bool Equals(object? obj) => obj is Vector2 x && this == x;
+
+    public static Vector2 operator +(Vector2 x, Vector2 y) => new(x.X + y.X, x.Y + y.Y);
+    public static Vector2 operator -(Vector2 x, Vector2 y) => new(x.X - y.X, x.Y - y.Y);
 }
 
 public static class Boundaries
@@ -289,11 +299,6 @@ public static class Screen
 
     public static void DrawPixel(Vector2 p)
     {
-        if (p == null)
-        {
-            throw new ArgumentNullException(nameof(p), "p was null on Screen.DrawPixel(Vector2 p)");
-        }
-
         if (p.X >= 0 && p.X < Width && p.Y >= 0 && p.Y < Height)
         {
             _pixels[p.Y][p.X] = true;
