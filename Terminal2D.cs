@@ -14,6 +14,12 @@ public class Vector2
         Y = y;
     }
 
+    public Vector2(Vector2 copying)
+    {
+        X = copying.X;
+        Y = copying.Y;
+    }
+
     public int X { get; init; }
 
     public int Y { get; init; }
